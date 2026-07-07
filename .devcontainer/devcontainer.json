@@ -1,0 +1,6 @@
+
+{
+	"image": "mcr.microsoft.com/devcontainers/php:8.4",
+    "postCreateCommand": "sh \"$PWD/.devcontainer/setup.sh\"",
+    "postStartCommand": "sudo apache2ctl start"
+}
