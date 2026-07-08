@@ -1,5 +1,27 @@
 # Les Créneaux
 
+> [!NOTE]  
+> Fork du [repo du _Mur_](https://github.com/lemurdu20escalade/LesCreneaux)
+>
+> - La branche `variante-caf` porte les modifications apportées dans le cadre de l'expérimentation de l'outil.  
+> - La branche `main` restera synchro avec le repo principal
+>
+>
+> Certaines évolutions peuvent intéresser _Le Mur_ et faire l'objet d'une PR au repo principal, d'autre probablement moins : c'est à préciser dans le changelog plus bas.
+>
+> (Se rérérer au message de chaque commit pour plus de détails)
+>
+> ### Évolutions
+>
+> - Création d'un `devconainer`  
+>   .  
+>   **Peut interesser _Le Mur_ :** `oui`  
+>   
+>
+> Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
+
+.
+
 Outil web de gestion de créneaux partagés pour associations et collectifs : un lieu, des créneaux, un·e référent·e qui ouvre, des inscrit·es libres.
 
 Pas de compte utilisateur, pas de tracker, pas de JavaScript requis pour les actions de base. Tout fonctionne en fallback HTML pur ; htmx est un confort, pas une dépendance fonctionnelle.
