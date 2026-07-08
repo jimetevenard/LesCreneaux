@@ -117,13 +117,30 @@ function pluriel(int $n, string $marque = 's'): string
  * Note : 'partielle' reste positif ("Encadré") — la couleur orange du chip
  * porte la nuance. Pas question qu'un·e référent·e se sente mal de ne
  * couvrir qu'une partie du créneau : c'est déjà précieux.
+ * 
+ * Addendum : Simplifié pour plus de lisibilité, "Encadré' n'étant pas très
+ * clair. La couleur du chip est désormais bleue, moins négatif.
+ * (Message = "le créneau est ouvert", avec nuance)
  */
 function libelleStatut(string $statut): string
 {
     return match ($statut) {
-        'complete'  => 'Avec référent·e',
-        'partielle' => 'Encadré',
+        'complete'  => 'Référent·e inscrit·e',
+        'partielle' => 'Référent·e inscrit·e', // Même libellé
         'absente'   => 'Sans référent·e',
+        default     => '',
+    };
+}
+
+/**
+ * Mention complémentaire pour le statut du créneau.
+ * Permet d'apporter un peu élement de clarification.
+ */
+function mentionOuvertureStatut(string $statut): string
+{
+    return match ($statut) {
+        'complete'  => 'Le créneau est ouvert',
+        'partielle' => 'Le créneau est ouvert, tant qu\'un·e référent·e est présent·e',
         default     => '',
     };
 }

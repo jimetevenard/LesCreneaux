@@ -84,7 +84,15 @@ $rendreRef = static function (array $r) use ($hDebutJour, $hFinJour): string {
 
         <?php if ($nbRef > 0): ?>
             <span class="c-refs">
+                <span class="mention"><?= mentionOuvertureStatut($statut) ?></span><br />
                 Référent·es : <?= e(implode(', ', array_map($rendreRef, $afficheRef))) ?><?php if ($resteRef > 0): ?><span class="c-reste"> + <?= $resteRef ?></span><?php endif; ?>
+            </span>
+        <?php endif; ?>
+
+        <?php if ($nbRef === 0): ?>
+            <span class="c-norefs">
+                <!-- NB: Le Mur ne souhaite pas "culpabiliser" les référent.e.s - à challenger en PR -->
+                Pas de référent·es inscrit·es sur ce créneau.
             </span>
         <?php endif; ?>
 

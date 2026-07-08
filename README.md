@@ -17,6 +17,12 @@
 >   .  
 >   **Peut interesser _Le Mur_ :** `oui`  
 >   
+> - Evolution de l'affichage des inscription partielle de référent·e·s  
+>   .  
+>   Message "Référent·e inscrit·e" que l'ouverture soit partielle ou non.
+>   Passage en bleu (à la place d'orange) dans le cas d'une ouverture partielle du créneau, et ajout d'une mention explicative  
+>   **Peut interesser _Le Mur_ :** `oui`  
+>   
 >
 > Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
 

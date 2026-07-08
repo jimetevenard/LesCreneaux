@@ -229,7 +229,7 @@ main.container {
 }
 
 .chip--complete  { background: var(--success-soft); color: var(--success); }
-.chip--partielle { background: var(--warning-soft); color: var(--warning); }
+.chip--partielle { background: var(--info-soft); color: var(--info); }
 .chip--absente   { background: var(--error-soft);   color: var(--error); }
 
 /* Fieldset d'étiquettes dans les forms */
@@ -916,7 +916,7 @@ main.container {
 .c-compteur-val { color: var(--on-surface); }
 .c-compteur-sep { color: var(--on-surface-soft); margin-inline: 1px; }
 
-.c-refs {
+.c-refs, .c-norefs {
     grid-column: 2 / -2;
     grid-row: 2;
     color: var(--on-surface);
@@ -926,6 +926,14 @@ main.container {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.c-norefs {
+    color: var(--on-surface-soft);
+}
+.c-refs .mention {
+    color: var(--success);
+    font-weight: 600;
+}
+
 .c-noms {
     grid-column: 2 / -2;
     grid-row: 3;
