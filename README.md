@@ -23,6 +23,12 @@
 >   Passage en bleu (à la place d'orange) dans le cas d'une ouverture partielle du créneau, et ajout d'une mention explicative  
 >   **Peut interesser _Le Mur_ :** `oui`  
 >   
+> - Suppression du mécanisme d'ouverture par défaut du volet _Ajout de référent·e_  
+>   .  
+>   Il y a risque de confusion, les participants peuvent s'y inscrire par erreur.
+>   Il faut donc cliquer explicitement sur le bouton pour déplier ce volet.  
+>   **Peut interesser _Le Mur_ :** `oui`  
+>  
 >
 > Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
 

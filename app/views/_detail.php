@@ -78,7 +78,7 @@ $hxSwap   = $inDrawer
             </ul>
         <?php endif; ?>
 
-        <details class="bloc-ajout"<?= (empty($jour['referentes']) && !$sansReferent) ? ' open' : '' ?>>
+        <details class="bloc-ajout">
             <summary><?= icon('person_add', 16) ?><span>Ajouter un·e référent·e</span></summary>
             <form action="/jour/<?= $jourId ?>/referente/ajouter" method="post" class="form-ajout"
                   <?php if ($inDrawer): ?>hx-post="/jour/<?= $jourId ?>/referente/ajouter"<?= $hxSwap ?><?php endif; ?>>
