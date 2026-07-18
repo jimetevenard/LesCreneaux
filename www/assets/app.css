@@ -765,11 +765,12 @@ main.container {
    passe par aria-current="date" sur le lien. */
 .chip .icon { margin-inline-end: 1px; }
 
-/* ---------- Historique (jours passés, <details> replié) ---------- */
-.historique {
+/* ---------- Bloc de créneaux masqués - <details> replié ---------- */
+/*            (exemple: historique des jours passés)                 */
+details.creneaux-repli {
     margin-top: var(--sp-5);
 }
-.historique-summary {
+.repli-summary {
     display: block;
     padding: var(--sp-3) var(--sp-4);
     background: var(--surface);
@@ -783,55 +784,55 @@ main.container {
     transition: background 120ms ease, border-color 120ms ease;
     -webkit-tap-highlight-color: transparent;
 }
-.historique-summary::-webkit-details-marker,
-.historique > summary::-webkit-details-marker { display: none; }
-.historique-summary::marker,
-.historique > summary::marker { content: ''; }
-.historique-inner {
+.repli-summary::-webkit-details-marker,
+details.creneaux-repli > summary::-webkit-details-marker { display: none; }
+.repli-summary::marker,
+details.creneaux-repli > summary::marker { content: ''; }
+.repli-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-3);
 }
-.historique-summary:hover {
+.repli-summary:hover {
     background: var(--surface-hover);
     border-color: var(--outline);
     color: var(--on-surface);
 }
-.historique-summary:focus-visible {
+.repli-summary:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
 }
-.historique-label {
+.repli-label {
     display: inline-flex;
     align-items: center;
     gap: var(--sp-2);
 }
-.historique-count {
+.repli-count {
     font-weight: 400;
     color: var(--on-surface-soft);
     font-size: 13px;
 }
-.historique-count::before {
+.repli-count::before {
     content: "· ";
     opacity: 0.6;
     margin-inline-end: 2px;
 }
-.historique-chevron {
+.repli-chevron {
     display: inline-flex;
     color: var(--on-surface-soft);
     transition: transform 180ms ease;
 }
-.historique[open] .historique-summary {
+details.creneaux-repli[open] .repli-summary {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom-color: transparent;
     background: var(--surface-hover);
 }
-.historique[open] .historique-chevron {
+details.creneaux-repli[open] .repli-chevron {
     transform: rotate(180deg);
 }
-.liste-historique {
+.liste-repli {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     margin-top: -1px;

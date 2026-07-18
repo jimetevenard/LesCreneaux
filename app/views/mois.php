@@ -110,6 +110,20 @@ $moisNext  = DateFr::moisNom((int)$debutMois->modify('+1 month')->format('n'));
         }
         $nbPassesCreneaux = count(array_filter($passes, static fn($it): bool => $it['type'] === 'jour'));
 
+        $futursAvecRefererentes  = [];
+        $futursSansRefererentes  = [];
+        foreach ($futurs as $it) {
+            $isJour = $it['type'] === 'jour';
+            $nbRef = $isJour ? count($it['data']['referentes']) : 0;
+
+            if ($isJour && $nbRef > 0) {
+                $futursAvecRefererentes[] = $it;
+            } else {
+                $futursSansRefererentes[] = $it;
+            }
+        }
+        $nbFutursSansRefererentes = count($futursSansRefererentes);
+
         $rendre = static function (array $it): void {
             if ($it['type'] === 'jour') {
                 $jour = $it['data'];
@@ -121,21 +135,38 @@ $moisNext  = DateFr::moisNom((int)$debutMois->modify('+1 month')->format('n'));
         };
         ?>
         <ol class="liste-creneaux">
-            <?php foreach ($futurs as $it) { $rendre($it); } ?>
+            <?php foreach ($futursAvecRefererentes as $it) { $rendre($it); } ?>
         </ol>
-        <?php if (!empty($passes)): ?>
-            <details class="historique">
-                <summary class="historique-summary">
-                    <span class="historique-inner">
-                        <span class="historique-label">
-                            <?= icon('history', 18) ?>
-                            <span>Historique</span>
-                            <span class="historique-count"><?= $nbPassesCreneaux ?> créneau<?= $nbPassesCreneaux > 1 ? 'x' : '' ?> passé<?= $nbPassesCreneaux > 1 ? 's' : '' ?></span>
+        <?php if (!empty($futursSansRefererentes)): ?>
+            <details class="creneaux-repli">
+                <summary class="repli-summary">
+                    <span class="repli-inner">
+                        <span class="repli-label">
+                            <?= icon('person_add', 18) ?>
+                            <span>Créneaux sans référent·e</span>
+                            <span class="repli-count"><?= $nbFutursSansRefererentes ?> créneau<?= $nbFutursSansRefererentes > 1 ? 'x' : '' ?> sans référent·e<?= $nbFutursSansRefererentes > 1 ? 's' : '' ?></span>
                         </span>
-                        <span class="historique-chevron" aria-hidden="true"><?= icon('expand_more', 20) ?></span>
+                        <span class="repli-chevron" aria-hidden="true"><?= icon('expand_more', 20) ?></span>
                     </span>
                 </summary>
-                <ol class="liste-creneaux liste-historique">
+                <ol class="liste-creneaux liste-repli">
+                    <?php foreach ($futursSansRefererentes as $it) { $rendre($it); } ?>
+                </ol>
+            </details>
+        <?php endif; ?>
+        <?php if (!empty($passes)): ?>
+            <details class="creneaux-repli">
+                <summary class="repli-summary">
+                    <span class="repli-inner">
+                        <span class="repli-label">
+                            <?= icon('history', 18) ?>
+                            <span>Historique</span>
+                            <span class="repli-count"><?= $nbPassesCreneaux ?> créneau<?= $nbPassesCreneaux > 1 ? 'x' : '' ?> passé<?= $nbPassesCreneaux > 1 ? 's' : '' ?></span>
+                        </span>
+                        <span class="repli-chevron" aria-hidden="true"><?= icon('expand_more', 20) ?></span>
+                    </span>
+                </summary>
+                <ol class="liste-creneaux liste-repli">
                     <?php foreach ($passes as $it) { $rendre($it); } ?>
                 </ol>
             </details>

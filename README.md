@@ -28,6 +28,11 @@
 >   Il y a risque de confusion, les participants peuvent s'y inscrire par erreur.
 >   Il faut donc cliquer explicitement sur le bouton pour déplier ce volet.  
 >   **Peut interesser _Le Mur_ :** `oui`  
+>   
+> - Masquage par défaut des créneaux  
+>   .  
+>   Séparation des créneaux avec ou sans référent·es : les créneux sans référent·e sont affiché dans un volet replié, comme l'historique des créneaux passés.  
+>   **Peut interesser _Le Mur_ :** `non` (probablement pas)  
 >  
 >
 > Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
