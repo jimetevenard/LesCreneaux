@@ -14,6 +14,17 @@ final class Version
     // pour afficher la notification de mise à jour.
     public const APP = '0.1.0';
 
+    // Version complète avec Semver et SHA Git (type '0.1.2-abcedef12')
+    // Si git non disponible, seule la version Semver sera retournée
+    public static function revision(): string
+    {   
+            $res = [Version::APP];
+            exec('git rev-parse --short HEAD', $res);
+
+            return implode('-',$res);
+    }
+
+
     public static function signature(PDO $pdo): string
     {
         $row = $pdo->query(

@@ -16,7 +16,7 @@ $logoUrl = setting(SettingsRepo::CLE_ASSO_LOGO_URL, ASSO_LOGO_URL_DEFAUT);
     <meta name="theme-color" content="#1976d2">
     <title><?= e($titre ?? ('Créneaux ' . $assoNom)) ?></title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="stylesheet" href="/assets/app.css"><!-- Pico retiré, Material Design custom -->
+    <link rel="stylesheet" href="/assets/app.css?v=<?= Version::revision() ?>"><!-- Pico retiré, Material Design custom -->
     <?php if (!empty($needsHtmx)): /* chargé uniquement là où on en a besoin */ ?>
         <script src="/assets/htmx.min.js" defer></script>
     <?php endif; ?>

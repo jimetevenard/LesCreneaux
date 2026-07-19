@@ -34,6 +34,11 @@
 >   Séparation des créneaux avec ou sans référent·es : les créneux sans référent·e sont affiché dans un volet replié, comme l'historique des créneaux passés.  
 >   **Peut interesser _Le Mur_ :** `non` (probablement pas)  
 >  
+> - _Cache busting_ sur app.css  
+>   .  
+>   Ajout d'un ["cache busting"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control#caching_static_assets_with_cache_busting) sur l'appel à app.css, pour invalider le cache si la version de l'app a changé  
+>   **Peut interesser _Le Mur_ :** `oui` 
+>  
 >
 > Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
 
