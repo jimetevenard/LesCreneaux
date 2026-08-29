@@ -46,6 +46,11 @@
 >   (et rétablir la contrainte en tenant compte du lieu)  
 >   **Peut interesser _Le Mur_ :** `non`  
 >   
+> - Seeds adaptés pour le CAF  
+>   .  
+>   Adaptation du jeu de données initial pour le CAF  
+>   **Peut interesser _Le Mur_ :** `non`  
+>   
 >
 > Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
 

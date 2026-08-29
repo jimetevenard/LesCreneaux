@@ -109,8 +109,13 @@ CREATE TABLE IF NOT EXISTS plage_operations (
 
 -- Labels par défaut fournis avec l'app (renommables/supprimables ensuite).
 INSERT OR IGNORE INTO labels (nom, couleur, bloque_inscriptions, ouvre_voisines) VALUES
-  ('CAF',             '#ff8f00', 0, 0),
-  ('Parents-enfants', '#7e57c2', 0, 0),
-  ('Salle fermée',    '#b71c1c', 1, 0),
-  ('Séance spéciale', '#0e5a7e', 1, 0),
-  ('Ouvert aux voisin·es', '#0d47a1', 0, 1);
+  -- Gestion multi-salle du pauvre via les étiquettes
+  ('Alice Millat',      '#002fff', 0, 0),
+  ('Marie Paradis',     '#c29e00', 0, 0),
+  ('Jules Ladoumègue',  '#fd4800', 0, 0),
+  ('Jacqueline Auriol', '#2178a0', 0, 0),
+  ('Paul Meurice',      '#1a9900', 0, 0),
+
+  -- On garde les bloquantes du Mur
+  ('Salle fermée',     '#b71c1c', 1, 0),
+  ('Séance spéciale',  '#0e5a7e', 1, 0);
