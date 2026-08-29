@@ -930,6 +930,8 @@ details.creneaux-repli[open] .repli-chevron {
 .c-norefs {
     color: var(--on-surface-soft);
 }
+
+/* TODO, sur mobile, .c-norefs percute .c-chips C'est clairement de mon fait. */
 .c-refs .mention {
     color: var(--success);
     font-weight: 600;
@@ -981,7 +983,7 @@ details.creneaux-repli[open] .repli-chevron {
         grid-row: 2;
         order: 3;
     }
-    .c-refs {
+    .c-refs, .c-norefs {
         grid-column: 1 / -1;
         grid-row: 3;
     }
