@@ -8,8 +8,11 @@ CREATE TABLE IF NOT EXISTS jours (
   heure_debut  TEXT    NOT NULL,                 -- 'HH:MM'
   heure_fin    TEXT    NOT NULL,                 -- 'HH:MM'
   capacite     INTEGER NOT NULL DEFAULT 15,
-  note         TEXT,
-  UNIQUE(date, heure_debut)
+  note         TEXT
+
+  -- FIXME: Contrainte commentée pour la gestion multi-salle.
+  --        La vision cible serait une gestion multi-salle, avec contrainte UNIQUE(date, heure_debut, lieu)
+  -- UNIQUE(date, heure_debut)
 );
 CREATE INDEX IF NOT EXISTS idx_jours_date ON jours(date);
 

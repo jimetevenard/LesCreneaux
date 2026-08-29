@@ -39,6 +39,13 @@
 >   Ajout d'un ["cache busting"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control#caching_static_assets_with_cache_busting) sur l'appel à app.css, pour invalider le cache si la version de l'app a changé  
 >   **Peut interesser _Le Mur_ :** `oui` 
 >  
+> - Suppression de la contrainte d'unicité date et heure des créneaux  
+>   .  
+>   Le CAF dispose de plusieurs salles, avec donc, des créneaux qui peuvent être au même moment.
+>   C'est un workaround, il faudrait idéalement implémenter une feature de gestion des lieux
+>   (et rétablir la contrainte en tenant compte du lieu)  
+>   **Peut interesser _Le Mur_ :** `non`  
+>   
 >
 > Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
 
