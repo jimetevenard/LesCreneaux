@@ -12,7 +12,7 @@ final class Version
     // Version applicative publiée (semver). À bumper avec le CHANGELOG à
     // chaque release. Comparée à la dernière release GitHub par MiseAJour
     // pour afficher la notification de mise à jour.
-    public const APP = '0.1.0';
+    public const APP = '0.1.1';
 
     // Version complète avec Semver et SHA Git (type '0.1.2-abcedef12')
     // Si git non disponible, seule la version Semver sera retournée

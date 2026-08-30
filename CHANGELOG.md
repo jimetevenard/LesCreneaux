@@ -5,7 +5,14 @@ Ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ## [Unreleased]
 
+Pas encore d'updates
+
+## [0.1.1] — 2026-08-30
+
 ### Ajouté
+
+- Évolution pour l'expérimentation au CAF.  
+  Voir le README pour détails
 - Notification de mise à jour : bandeau sur `/reglages` quand une release
   GitHub plus récente existe (vérification passive, cache 24 h, fail-open,
   désactivable via `MAJ_CHECK`). Aucune écriture sur le code.
