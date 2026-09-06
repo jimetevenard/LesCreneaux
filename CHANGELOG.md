@@ -7,6 +7,11 @@ Ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 Pas encore d'updates
 
+## [0.1.2] — 2026-09-06
+
+- Empty state si pas aucun des créneaux n'est ouvert par un·e référent·e  
+- Grisage des créneaux si présence d'une étiquante bloquante  
+
 ## [0.1.1] — 2026-08-30
 
 ### Ajouté
