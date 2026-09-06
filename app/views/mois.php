@@ -52,124 +52,128 @@ $moisNext  = DateFr::moisNom((int)$debutMois->modify('+1 month')->format('n'));
     </a>
 </nav>
 
-<?php if (empty($jours) && empty($fermetures)): ?>
-    <div class="etat-vide">
-        <p>Aucun créneau ce mois-ci.</p>
-        <p><a class="btn-text" href="/reglages">Ouvrir les réglages</a> pour ajouter des créneaux récurrents.</p>
-    </div>
-<?php else: ?>
-    <section id="liste-jours"
-             hx-get="/mois/<?= e($mois) ?>"
-             hx-trigger="every 60s, rafraichir-mois from:body"
-             hx-select="#liste-jours"
-             hx-swap="outerHTML">
-        <?php
-        // Fusionne créneaux et fermetures en un flux chronologique unique :
-        // même clé de tri (date + heure) pour que les fermetures glissent
-        // à leur place. Les fermetures ont une heure virtuelle "00:00"
-        // pour s'afficher en tête de la journée concernée.
-        //
-        // Règle de priorité : une fermeture écrase tout créneau partageant
-        // la même date (évite les doublons si un créneau a été généré avant
-        // que la fermeture soit déclarée). Le write-path nettoie aussi,
-        // ce filtre est une ceinture-bretelles d'affichage.
-        $datesFermees = [];
-        foreach ($fermetures as $f) {
-            $datesFermees[$f['date']] = true;
-        }
-        $items = [];
-        foreach ($jours as $j) {
-            if (isset($datesFermees[$j['date']])) {
-                continue;
-            }
-            $items[] = [
-                'type' => 'jour',
-                'sort' => $j['date'] . ' ' . $j['heure_debut'],
-                'data' => $j,
-            ];
-        }
-        foreach ($fermetures as $f) {
-            $items[] = [
-                'type' => 'fermeture',
-                'sort' => $f['date'] . ' 00:00',
-                'data' => $f,
-            ];
-        }
-        usort($items, static fn(array $a, array $b): int => strcmp($a['sort'], $b['sort']));
+<?php
+// Fusionne créneaux et fermetures en un flux chronologique unique :
+// même clé de tri (date + heure) pour que les fermetures glissent
+// à leur place. Les fermetures ont une heure virtuelle "00:00"
+// pour s'afficher en tête de la journée concernée.
+//
+// Règle de priorité : une fermeture écrase tout créneau partageant
+// la même date (évite les doublons si un créneau a été généré avant
+// que la fermeture soit déclarée). Le write-path nettoie aussi,
+// ce filtre est une ceinture-bretelles d'affichage.
+$datesFermees = [];
+foreach ($fermetures as $f) {
+    $datesFermees[$f['date']] = true;
+}
+$items = [];
+foreach ($jours as $j) {
+    if (isset($datesFermees[$j['date']])) {
+        continue;
+    }
+    $items[] = [
+        'type' => 'jour',
+        'sort' => $j['date'] . ' ' . $j['heure_debut'],
+        'data' => $j,
+    ];
+}
+foreach ($fermetures as $f) {
+    $items[] = [
+        'type' => 'fermeture',
+        'sort' => $f['date'] . ' 00:00',
+        'data' => $f,
+    ];
+}
+usort($items, static fn(array $a, array $b): int => strcmp($a['sort'], $b['sort']));
 
-        $today   = new DateTimeImmutable('today');
-        $futurs  = [];
-        $passes  = [];
-        foreach ($items as $it) {
-            $d = new DateTimeImmutable($it['data']['date']);
-            if ($d >= $today) {
-                $futurs[] = $it;
-            } else {
-                $passes[] = $it;
-            }
-        }
-        $nbPassesCreneaux = count(array_filter($passes, static fn($it): bool => $it['type'] === 'jour'));
+$today   = new DateTimeImmutable('today');
+$futurs  = [];
+$passes  = [];
+foreach ($items as $it) {
+    $d = new DateTimeImmutable($it['data']['date']);
+    if ($d >= $today) {
+        $futurs[] = $it;
+    } else {
+        $passes[] = $it;
+    }
+}
+$nbPassesCreneaux = count(array_filter($passes, static fn($it): bool => $it['type'] === 'jour'));
 
-        $futursAvecRefererentes  = [];
-        $futursSansRefererentes  = [];
-        foreach ($futurs as $it) {
-            $isJour = $it['type'] === 'jour';
-            $nbRef = $isJour ? count($it['data']['referentes']) : 0;
+$futursAvecRefererentes  = [];
+$futursSansRefererentes  = [];
+foreach ($futurs as $it) {
+    $isJour = $it['type'] === 'jour';
+    $nbRef = $isJour ? count($it['data']['referentes']) : 0;
 
-            if ($isJour && $nbRef > 0) {
-                $futursAvecRefererentes[] = $it;
-            } else {
-                $futursSansRefererentes[] = $it;
-            }
-        }
-        $nbFutursSansRefererentes = count($futursSansRefererentes);
+    if ($isJour && $nbRef > 0) {
+        $futursAvecRefererentes[] = $it;
+    } else {
+        $futursSansRefererentes[] = $it;
+    }
+}
+$nbFutursSansRefererentes = count($futursSansRefererentes);
 
-        $rendre = static function (array $it): void {
-            if ($it['type'] === 'jour') {
-                $jour = $it['data'];
-                require __DIR__ . '/_ligne.php';
-            } else {
-                $fermeture = $it['data'];
-                require __DIR__ . '/_fermeture.php';
-            }
-        };
-        ?>
-        <ol class="liste-creneaux">
-            <?php foreach ($futursAvecRefererentes as $it) { $rendre($it); } ?>
-        </ol>
-        <?php if (!empty($futursSansRefererentes)): ?>
-            <details class="creneaux-repli">
-                <summary class="repli-summary">
-                    <span class="repli-inner">
-                        <span class="repli-label">
-                            <?= icon('person_add', 18) ?>
-                            <span>Créneaux sans référent·e</span>
-                            <span class="repli-count"><?= $nbFutursSansRefererentes ?> créneau<?= $nbFutursSansRefererentes > 1 ? 'x' : '' ?> sans référent·e<?= $nbFutursSansRefererentes > 1 ? 's' : '' ?></span>
-                        </span>
-                        <span class="repli-chevron" aria-hidden="true"><?= icon('expand_more', 20) ?></span>
+$rendre = static function (array $it): void {
+    if ($it['type'] === 'jour') {
+        $jour = $it['data'];
+        require __DIR__ . '/_ligne.php';
+    } else {
+        $fermeture = $it['data'];
+        require __DIR__ . '/_fermeture.php';
+    }
+};
+?>
+
+
+<section id="liste-jours"
+            hx-get="/mois/<?= e($mois) ?>"
+            hx-trigger="every 60s, rafraichir-mois from:body"
+            hx-select="#liste-jours"
+            hx-swap="outerHTML">
+
+    <?php if (empty($futursAvecRefererentes) && empty($fermetures)): ?>
+        <div class="etat-vide">
+            <h3>Aucun créneau ouvert ce mois-ci.</h3>
+            <p>Consulte régulièrement cette page, les référents mettent fréquemment à jour leurs disponibilités</p>
+        </div>
+    <?php endif; ?>
+
+    <ol class="liste-creneaux">
+        <?php foreach ($futursAvecRefererentes as $it) { $rendre($it); } ?>
+    </ol>
+    <?php if (!empty($futursSansRefererentes)): ?>
+        <details class="creneaux-repli">
+            <summary class="repli-summary">
+                <span class="repli-inner">
+                    <span class="repli-label">
+                        <?= icon('person_add', 18) ?>
+                        <span>Créneaux sans référent·e</span>
+                        <span class="repli-count"><?= $nbFutursSansRefererentes ?> créneau<?= $nbFutursSansRefererentes > 1 ? 'x' : '' ?> sans référent·e<?= $nbFutursSansRefererentes > 1 ? 's' : '' ?></span>
                     </span>
-                </summary>
-                <ol class="liste-creneaux liste-repli">
-                    <?php foreach ($futursSansRefererentes as $it) { $rendre($it); } ?>
-                </ol>
-            </details>
-        <?php endif; ?>
-        <?php if (!empty($passes)): ?>
-            <details class="creneaux-repli">
-                <summary class="repli-summary">
-                    <span class="repli-inner">
-                        <span class="repli-label">
-                            <?= icon('history', 18) ?>
-                            <span>Historique</span>
-                            <span class="repli-count"><?= $nbPassesCreneaux ?> créneau<?= $nbPassesCreneaux > 1 ? 'x' : '' ?> passé<?= $nbPassesCreneaux > 1 ? 's' : '' ?></span>
-                        </span>
-                        <span class="repli-chevron" aria-hidden="true"><?= icon('expand_more', 20) ?></span>
+                    <span class="repli-chevron" aria-hidden="true"><?= icon('expand_more', 20) ?></span>
+                </span>
+            </summary>
+            <ol class="liste-creneaux liste-repli">
+                <?php foreach ($futursSansRefererentes as $it) { $rendre($it); } ?>
+            </ol>
+        </details>
+    <?php endif; ?>
+    <?php if (!empty($passes)): ?>
+        <details class="creneaux-repli">
+            <summary class="repli-summary">
+                <span class="repli-inner">
+                    <span class="repli-label">
+                        <?= icon('history', 18) ?>
+                        <span>Historique</span>
+                        <span class="repli-count"><?= $nbPassesCreneaux ?> créneau<?= $nbPassesCreneaux > 1 ? 'x' : '' ?> passé<?= $nbPassesCreneaux > 1 ? 's' : '' ?></span>
                     </span>
-                </summary>
-                <ol class="liste-creneaux liste-repli">
-                    <?php foreach ($passes as $it) { $rendre($it); } ?>
-                </ol>
-            </details>
-        <?php endif; ?>
-    </section>
-<?php endif; ?>
+                    <span class="repli-chevron" aria-hidden="true"><?= icon('expand_more', 20) ?></span>
+                </span>
+            </summary>
+            <ol class="liste-creneaux liste-repli">
+                <?php foreach ($passes as $it) { $rendre($it); } ?>
+            </ol>
+        </details>
+    <?php endif; ?>
+</section>
+

@@ -51,6 +51,13 @@
 >   Adaptation du jeu de données initial pour le CAF  
 >   **Peut interesser _Le Mur_ :** `non`  
 >   
+> - Empty state si pas aucun des créneaux n'est ouvert par un·e référent·e  
+>   .  
+>   Il ne s'affichait que si aucun créneau n'était configuré.  
+>   Comme dans ce fork, l'accent est mis sur les participants (et les créneaux non ouverts "cachés"
+>   dans le dépliant) on affiche l'empty state dans le cas où tous les créneaux sont sans référent·e.
+>   **Peut interesser _Le Mur_ :** `probablement pas` (pas la philosophie initiale)  
+>   
 >
 > Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
 
