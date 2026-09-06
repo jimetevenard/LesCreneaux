@@ -24,6 +24,9 @@ $rendreNom = static function (array $ins): string {
     return $txt;
 };
 
+// Inscriptions bloquées sur le jour (Si PHP >= 8.4)
+$inscriptionsBloquees = function_exists('array_any') ? array_any($jour['labels'], fn ($label) => $label['bloque_inscriptions'] === 1) : false;
+
 // Référent·es : 3 noms max, compact. Affiche l'horaire uniquement quand
 // un·e référent·e ne couvre pas la totalité du créneau (sinon le nom suffit).
 $referentes = $jour['referentes'] ?? [];
@@ -47,7 +50,7 @@ $rendreRef = static function (array $r) use ($hDebutJour, $hFinJour): string {
         : $r['nom'] . ' ' . DateFr::formatPlage($r['heure_debut'], $hf);
 };
 ?>
-<li class="creneau<?= $normal ? '' : ' creneau--bloque' ?><?= ' creneau--' . e($temporalite) ?>">
+<li class="creneau<?= $normal ? '' : ' creneau--bloque' ?><?= ' creneau--' . e($temporalite) ?> <?= $inscriptionsBloquees ? 'inscriptions-bloquees' : '' ?>">
     <a class="creneau-link"
        href="/jour/<?= $jourId ?>"
        data-drawer="<?= $jourId ?>"

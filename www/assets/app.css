@@ -752,6 +752,17 @@ main.container {
     opacity: 0.75;
     filter: saturate(0.85);
 }
+
+/* Grisage des inscriptions bloquées */
+.inscriptions-bloquees .creneau-link {
+    opacity: 0.5;
+    filter: saturate(0.6);
+}
+.inscriptions-bloquees .creneau-link:hover {
+    opacity: 0.75;
+    filter: saturate(0.85);
+}
+
 .creneau--aujourdhui {
     background: var(--primary-soft);
     box-shadow: inset 4px 0 0 var(--primary);

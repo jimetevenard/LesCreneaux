@@ -58,6 +58,12 @@
 >   dans le dépliant) on affiche l'empty state dans le cas où tous les créneaux sont sans référent·e.
 >   **Peut interesser _Le Mur_ :** `probablement pas` (pas la philosophie initiale)  
 >   
+> - Grisage des créneaux si présence d'une étiquante bloquante   
+>   .  
+>   Si un créneau à au moins une étiquette qui `bloque_inscriptions`, il apparait
+>   grisé, comme les créneaux passés.  
+>   **Peut interesser _Le Mur_ :** `oui`  
+>   
 >
 > Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
 
