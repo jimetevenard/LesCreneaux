@@ -25,23 +25,24 @@ $MEURICE = $labelId['Paul Meurice']   ?? null;
 
 
 // [jour_semaine, hd, hf, capa, labels[], commentaire]
+$JAUGE = 6;
 $modeles = [
-    [1, '17:30', '22:30', 15, [$LADOUMEGUE],  null ], // Ladoumègue
-    [1, '20:00', '22:00', 15, [$MILLAT],  null ], // Alice Milliat
-    [2, '17:30', '20:00', 15, [$MILLAT],  null ], // Alice Milliat
-    [3, '12:00', '13:30', 15, [$MILLAT],  null ], // Alice Milliat
-    [3, '19:00', '22:30', 15, [$MEURICE],  null ], // Paul Meurice
-    [4, '17:30', '20:00', 15, [$MILLAT],  null ], // Alice Milliat
-    [4, '18:00', '20:00', 15, [$AURIOL],  null ], // Jacqueline Auriol
-    [4, '18:00', '20:00', 15, [$PARADIS],  null ], // Marie Paradis
-    [5, '18:30', '22:30', 15, [$MEURICE],  null ], // Paul Meurice
-    [6, '09:00', '12:00', 15, [$MEURICE],  null ], // Paul Meurice
-    [6, '14:00', '22:00', 15, [$MEURICE],  null ], // Paul Meurice
-    [6, '18:30', '22:30', 15, [$PARADIS],  null ], // Marie Paradis
-    [6, '13:00', '20:00', 15, [$MILLAT],  null ], // Alice Milliat
-    [7, '09:00', '13:00', 15, [$MILLAT],  null ], // Alice Milliat
-    [7, '09:00', '13:00', 15, [$PARADIS],  null ], // Marie Paradis
-    [7, '14:00', '18:00', 15, [$MEURICE],  null ], // Paul Meurice
+    [1, '17:30', '22:30', $JAUGE, [$LADOUMEGUE],  null ], // Ladoumègue
+    [1, '20:00', '22:00', $JAUGE, [$MILLAT],  null ], // Alice Milliat
+    [2, '17:30', '20:00', $JAUGE, [$MILLAT],  null ], // Alice Milliat
+    [3, '12:00', '13:30', $JAUGE, [$MILLAT],  null ], // Alice Milliat
+    [3, '19:00', '22:30', $JAUGE, [$MEURICE],  null ], // Paul Meurice
+    [4, '17:30', '20:00', $JAUGE, [$MILLAT],  null ], // Alice Milliat
+    [4, '18:00', '20:00', $JAUGE, [$AURIOL],  null ], // Jacqueline Auriol
+    [4, '18:00', '20:00', $JAUGE, [$PARADIS],  null ], // Marie Paradis
+    [5, '18:30', '22:30', $JAUGE, [$MEURICE],  null ], // Paul Meurice
+    [6, '09:00', '12:00', $JAUGE, [$MEURICE],  null ], // Paul Meurice
+    [6, '14:00', '22:00', $JAUGE, [$MEURICE],  null ], // Paul Meurice
+    [6, '18:30', '22:30', $JAUGE, [$PARADIS],  null ], // Marie Paradis
+    [6, '13:00', '20:00', $JAUGE, [$MILLAT],  null ], // Alice Milliat
+    [7, '09:00', '13:00', $JAUGE, [$MILLAT],  null ], // Alice Milliat
+    [7, '09:00', '13:00', $JAUGE, [$PARADIS],  null ], // Marie Paradis
+    [7, '14:00', '18:00', $JAUGE, [$MEURICE],  null ], // Paul Meurice
 ];
 
 $ins = $pdo->prepare(
