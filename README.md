@@ -64,6 +64,12 @@
 >   grisé, comme les créneaux passés.  
 >   **Peut interesser _Le Mur_ :** `oui`  
 >   
+> - Blocage des créneaux si capacité atteinte   
+>   .  
+>   Si un créneau atteint le nombre d'inscrits de `capacite` (référent·e exclu·e·s), l'inscription est bloquée
+>   (comme dans le cas où une étiquette bloquante est présente).  
+>   **Peut interesser _Le Mur_ :** `peut-être`  
+>   
 >
 > Les évolutions pertinentes seront extraites et proposées en PR sur le repo du _Mur_
 

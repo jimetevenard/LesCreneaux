@@ -169,13 +169,7 @@ $hxSwap   = $inDrawer
             </form>
         <?php else: ?>
             <?php
-                $motif = '';
-                foreach ($jour['labels'] ?? [] as $l) {
-                    if ((int)($l['bloque_inscriptions'] ?? 0) === 1) {
-                        $motif = $l['nom'];
-                        break;
-                    }
-                }
+                $motif = motifClotureInscriptions($jour);
             ?>
             <p class="meta"><?= e($motif) ?> — inscriptions désactivées.</p>
         <?php endif; ?>

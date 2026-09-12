@@ -179,6 +179,11 @@ function jourBloque(array $jour): bool
     return false;
 }
 
+/** Vrai si le nombre d'inscriptions au créneau a atteint sa capacité */
+function jourComplet(array $jour): bool
+{
+    return count($jour['inscriptions']) >= $jour['capacite'];
+}
 /** Vrai si au moins une étiquette ouvre le créneau aux voisin·es. */
 function jourOuvreVoisines(array $jour): bool
 {
@@ -207,7 +212,23 @@ function jourSansReferent(array $jour): bool
 /** Le jour accepte des inscriptions : pas d'étiquette bloquante attachée. */
 function jourAccueilleInscriptions(array $jour): bool
 {
-    return !jourBloque($jour);
+    return !jourBloque($jour) && !jourComplet($jour);
+}
+
+/** Si inscriptions bloquées, retourne le motif de blocage  */
+function motifClotureInscriptions(array $jour) {
+    if(jourComplet($jour)) {
+        return "Créneau complet";
+    }
+
+    $motif = '';
+    foreach ($jour['labels'] ?? [] as $l) {
+        if ((int)($l['bloque_inscriptions'] ?? 0) === 1) {
+            $motif = $l['nom'];
+            break;
+        }
+    }
+    return $motif;
 }
 
 /**

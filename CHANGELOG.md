@@ -5,14 +5,14 @@ Ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ## [Unreleased]
 
-Pas encore d'updates
+- Blocage des créneaux si capacité atteinte  
 
-## [0.1.2] — 2026-09-06
+## [0.1.2] (CAF) — 2026-09-06
 
 - Empty state si pas aucun des créneaux n'est ouvert par un·e référent·e  
 - Grisage des créneaux si présence d'une étiquante bloquante  
 
-## [0.1.1] — 2026-08-30
+## [0.1.1] (CAF) — 2026-08-30
 
 ### Ajouté
 

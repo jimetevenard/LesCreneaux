@@ -194,7 +194,7 @@ declare(strict_types=1); ?>
                                 </label>
                             </div>
                             <label class="field">
-                                <span class="field-label">Capacité <span class="meta">(cas particulier)</span></span>
+                                <span class="field-label">Capacité</span>
                                 <input type="number" name="capacite" min="1" max="500" value="<?= (int)$m['capacite'] ?>" required>
                             </label>
                             <?php if (!empty($labels)): ?>
@@ -263,7 +263,7 @@ declare(strict_types=1); ?>
             </label>
         </div>
         <label class="field">
-            <span class="field-label">Limite d’inscription <span class="meta">(facultatif, cas particulier)</span></span>
+            <span class="field-label">Limite d’inscription <span class="meta">(facultatif)</span></span>
             <input type="number" name="capacite" min="1" max="500" value="15" required>
         </label>
         <?php if (!empty($labels)): ?>
